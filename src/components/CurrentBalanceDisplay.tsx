@@ -7,9 +7,9 @@ interface CurrentBalanceDisplayProps {
 
 const CurrentBalanceDisplay = ({ balance }: CurrentBalanceDisplayProps) => {
   return (
-    <div className="">
-      <h2 className="">SALDO ATUAL</h2>
-      <h1 className="">R$ {balance}</h1>
+    <div className="mb-5">
+      <h2 className="font-bold text-xl">SALDO ATUAL</h2>
+      <h1 className="font-semibold text-5xl">R$ {balance}</h1>
     </div>
   );
 };
