@@ -7,15 +7,14 @@ interface IncomeAndExpenseDisplayProps {
 
 function IncomeAndExpenseDisplay({expense, income}: IncomeAndExpenseDisplayProps) {
     return(
-        <div className="bg-card text-black flex justify-evenly rounded-lg py-2 md:w-9/12 lg:w-8/12 xl:w-7/12 ">
-            <div className="px-8">
-                <p className="font-bold">RECEITAS</p>
-                <p className="font-bold text-income">R$ {income}</p>
+        <div className="bg-card text-black flex flex-col sm:flex-row justify-evenly items-center rounded-lg py-2 px-4 w-3/4 sm:w-2/3">
+            <div className="w-1/2 border-b border-1 border-black sm:border-r sm:border-b-0">
+                <p className="font-bold text-xl">RECEITAS</p>
+                <p className="font-bold text-income text-md">R$ {income}</p>
             </div>
-            <div className="border-r-2 border-black "></div>
-            <div className="px-8">
-                <p className="font-bold">DESPESAS</p>
-                <p className="font-bold text-expense">R$ {expense}</p>
+            <div className="w-1/2">
+                <p className="font-bold text-xl">DESPESAS</p>
+                <p className="font-bold text-expense text-md">R$ {expense}</p>
             </div>
         </div>
     )
