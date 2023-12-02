@@ -11,8 +11,8 @@ interface Transaction {
   id: string;
   category: string;
   title: string;
-  amount: number;
-  date: Date;
+  amount: string;
+  date: string;
 }
 
 function App() {
@@ -25,6 +25,10 @@ function App() {
     // Fetch transactions when the component mounts
     fetchTransactions();
   }, []);
+  
+  useEffect(() => {
+    updateBalanceValue();
+  }, [transactions]);
 
   function fetchTransactions() {
       // Get transactions from local storage or initialize an empty array
@@ -33,6 +37,41 @@ function App() {
       // Reverse the array for presentation
       setTransactions(storedTransactions.reverse());
   }
+
+  function updateBalanceValue() {
+    const transactionsAmounts = transactions.map(function(transaction) {
+        return parseFloat(transaction.amount)
+    })
+
+    const total = transactionsAmounts  
+        .reduce(function(accumulator, transaction){
+            return accumulator + transaction
+        }, 0)  
+        .toFixed(2)
+
+    const income = transactionsAmounts
+        .filter(function(value) {
+            return value > 0
+        })
+        .reduce(function(accumulator, value) {
+            return accumulator + value
+        }, 0)
+        .toFixed(2)
+
+    const expense = Math.abs(transactionsAmounts
+        .filter(function(value){
+            return value < 0 
+        })
+        .reduce(function(accumulator, value){
+            return accumulator + value
+        }, 0))
+        .toFixed(2)
+
+      setBalance(total)
+      setIncome(income)
+      setExpense(expense)
+  };
+
 
   return (
     <div className="app w-full md:w-9/12 lg:w-8/12 xl:w-7/12 flex flex-col items-center mx-auto">
