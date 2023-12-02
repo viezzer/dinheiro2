@@ -1,8 +1,9 @@
-// import { useState } from 'react'
 import './App.css'
+//components
 import CurrentBalanceDisplay from './components/CurrentBalanceDisplay'
 import IncomeAndExpenseDisplay from './components/IncomeAndExpenseDisplay'
 import NewTransactionButton from './components/NewTransactionButton'
+import TransactionsList from './components/TransactionsList'
 
 import {useState, useEffect} from 'react'
 
@@ -72,12 +73,33 @@ function App() {
       setExpense(expense)
   };
 
+  function handleDeleteTransaction(ID:string, title:string) {
+    const shouldDelete = window.confirm(`Tem certeza de que deseja excluir "${title}"`);
+    if(shouldDelete){
+        const storedTransactionsJSON: string | null= localStorage.getItem('transactions');
+        const storedTransactions: Transaction[] = storedTransactionsJSON 
+          ? JSON.parse(storedTransactionsJSON)
+          : [] 
+        const storedTransactionsWithoutDeletedOne = storedTransactions.filter(function(transaction){
+            if(transaction.id!==ID) {
+                return transaction;
+            }
+            return false
+        })
+        // Save the updated transactions array back to local storage
+        localStorage.setItem('transactions', JSON.stringify(storedTransactionsWithoutDeletedOne));
+        setTransactions(storedTransactionsWithoutDeletedOne)
+        
+    }
+}
+
 
   return (
     <div className="app w-full md:w-9/12 lg:w-8/12 xl:w-7/12 flex flex-col items-center mx-auto">
       <CurrentBalanceDisplay balance={balance}/>
       <IncomeAndExpenseDisplay income={income} expense={expense}/>
       <NewTransactionButton reloadFatherCallback={fetchTransactions}/>
+      <TransactionsList transactions={transactions} handleDelete={handleDeleteTransaction} />
     </div>
   )
 }

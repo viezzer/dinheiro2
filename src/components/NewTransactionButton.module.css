@@ -42,5 +42,8 @@
     border-radius: 1rem; /* Equivalente a rounded-2xl no Tailwind */
     width: 100%;
     max-width: 28rem; /* Equivalente a max-w-md no Tailwind */
-    color:black
+    color:black;
+    top: 100px;
+    left: 50%;
+    transform: translate(-50%, 0%);
 }
