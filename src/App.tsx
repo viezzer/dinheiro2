@@ -25,7 +25,7 @@ function App() {
     // Fetch transactions when the component mounts
     fetchTransactions();
   }, []);
-  
+
   useEffect(() => {
     updateBalanceValue();
   }, [transactions]);
@@ -77,9 +77,7 @@ function App() {
     <div className="app w-full md:w-9/12 lg:w-8/12 xl:w-7/12 flex flex-col items-center mx-auto">
       <CurrentBalanceDisplay balance={balance}/>
       <IncomeAndExpenseDisplay income={income} expense={expense}/>
-      <div className="mt-5 h-10 flex items-center justify-center w-full">
-        <NewTransactionButton reloadFatherCallback={fetchTransactions}/>
-      </div>
+      <NewTransactionButton reloadFatherCallback={fetchTransactions}/>
     </div>
   )
 }
