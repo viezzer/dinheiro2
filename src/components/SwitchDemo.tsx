@@ -23,7 +23,7 @@ function SwitchDemo({setTitlePlaceholder, isIncome, setIsIncome}: SwitchDemoProp
     }
 
     return (
-        <div style={{ display: 'flex', alignItems: 'start', flexDirection: 'row'}}>
+        <div className='flex justify-center'>
             <p className={styles.incomeText}>Receita</p>
             <Switch.Root className={styles.SwitchRoot} id="isIncome" onClick={handleSwitch}>
                 <Switch.Thumb className={styles.SwitchThumb} />

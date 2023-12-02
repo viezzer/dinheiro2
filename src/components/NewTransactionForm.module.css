@@ -7,7 +7,7 @@
 .label {
     margin-top:10px;
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 10px;
 }
 
@@ -15,18 +15,18 @@
     border-radius: 10px;
     height:40px;
     padding:10px;
-    border: 1px solid var(--cardColor);
+    border: 1px solid var(--card);
 }
 
-.inputSubmit {
+.submitButton {
     margin-top: 20px;
-    color:white;
+    color: white;
     font-weight: 700;
     border-radius: 10px;
     height:40px;
     padding:10px;
-    border: 1px solid var(--cardColor);
-    background-color: var(--incomeColor);
+    border: 1px solid var(--card);
+    background-color: var(--income);
 }
 
 .switchDiv{

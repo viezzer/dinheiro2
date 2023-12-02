@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import Switch from './SwitchDemo';
-import styles from './NewTransactionForm.module.css';
 import { v4 as uuidv4 } from 'uuid';
+import styles from './NewTransactionForm.module.css';
 
 const currentDate = new Date().toISOString().split('T')[0];
 
@@ -33,7 +33,11 @@ function NewTransactionForm({reloadTransactionsFromChildreen}: NewTransactionFor
                 alert("Valor da transação inválido.")
                 return false
             } else {
-                return true
+                if(date === "") {
+                    alert("Selecione a data da transação.")
+                } else {
+                    return true
+                }
             }
         }
     }
@@ -72,10 +76,9 @@ function NewTransactionForm({reloadTransactionsFromChildreen}: NewTransactionFor
 
     return (
         <>
-            <h2 className='text-bold'>Nova transação</h2>
+            <h2 className=' text-2xl font-bold justify-center flex'>Nova transação</h2>
             <form className={styles.form} onSubmit={createTransaction}>
-                <label className={styles.label}>Tipo da transação</label>
-                <small>Receita para valor que entrou na sua conta. Despesa para valor que saiu da sua conta. </small>
+                <label className='flex justify-center font-semibold'>Tipo da transação:</label>
                 <div className={styles.switchDiv}>
                     <Switch 
                         setIsIncome={setIsIncome} 
@@ -113,7 +116,7 @@ function NewTransactionForm({reloadTransactionsFromChildreen}: NewTransactionFor
                     value={date}
                 />
 
-                <input className={styles.inputSubmit} type='submit'></input>
+                <button className='mt-5 bg-income h-10 font-bold text-white rounded-lg border-income' type='submit'>Enviar</button>
             </form>
         </>
     )
