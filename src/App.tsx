@@ -4,8 +4,16 @@ import CurrentBalanceDisplay from './components/CurrentBalanceDisplay'
 import IncomeAndExpenseDisplay from './components/IncomeAndExpenseDisplay'
 import NewTransactionButton from './components/NewTransactionButton'
 import TransactionsList from './components/TransactionsList'
+import DateFilter from './components/DateFilter'
 
+//state imports
 import {useState, useEffect} from 'react'
+
+//date imports
+import 'dayjs/locale/pt-br';  // Importe a configuração regional para português brasileiro
+import dayjs from 'dayjs';
+dayjs.locale('pt-br');  // Configure a configuração regional
+import { format, parse, subWeeks, subMonths , isAfter} from 'date-fns';
 
 
 interface Transaction {
@@ -21,6 +29,8 @@ function App() {
   const [balance, setBalance] = useState("3452.00")
   const [income, setIncome] = useState("345.00")
   const [expense, setExpense] = useState("546.54")
+  const [filter, setFilter] = useState('all'); // 'all' | 'week' | 'month' | 'custom'
+  
 
   useEffect(() => {
     // Fetch transactions when the component mounts
@@ -31,12 +41,53 @@ function App() {
     updateBalanceValue();
   }, [transactions]);
 
+  const applyFilter = (allTransactions: Transaction[]) => {
+    const currentDate = dayjs();
+    
+    switch (filter) {
+      case 'week':
+        // Obtém a data da última semana
+        const lastWeek = subWeeks(new Date(), 1);
+        return allTransactions.filter((transaction) => {
+          try {
+            const formattedTransactionDate = format(parse(transaction.created_at, 'dd/MM/yyyy', new Date()), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
+            const isAfterLastWeek = isAfter(parse(formattedTransactionDate, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx", new Date()), lastWeek);
+            if (isAfterLastWeek) {
+              return transaction
+            } 
+          } catch (error) {
+            console.error('Error formatting date:', error);
+          }
+        });
+      case 'month':
+        const lastMonth = subMonths(new Date(), 1);
+        return allTransactions.filter((transaction) => {
+          try {
+            const formattedTransactionDate = format(parse(transaction.created_at, 'dd/MM/yyyy', new Date()), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
+            const isAfterLastMonth = isAfter(parse(formattedTransactionDate, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx", new Date()), lastMonth);
+            if (isAfterLastMonth) {
+              return transaction
+            } 
+          } catch (error) {
+            console.error('Error formatting date:', error);
+          }
+          
+        });
+        break;
+      case 'custom':
+        // Implemente a lógica para filtrar transações com base em um período personalizado
+        break;
+      default:
+        return allTransactions;
+    }
+  };
+
   function fetchTransactions() {
       // Get transactions from local storage or initialize an empty array
       const storedTransactions: Transaction[] = JSON.parse(localStorage.getItem('transactions') || '[]');
-  
+      const filteredTransactions = applyFilter(storedTransactions)
       // Reverse the array for presentation
-      setTransactions(storedTransactions.reverse());
+      setTransactions(filteredTransactions.reverse());
   }
 
   function updateBalanceValue() {
@@ -94,11 +145,14 @@ function App() {
 }
 
 
+
+
   return (
     <div className="app w-full md:w-9/12 lg:w-8/12 xl:w-7/12 flex flex-col items-center mx-auto">
       <CurrentBalanceDisplay balance={balance}/>
       <IncomeAndExpenseDisplay income={income} expense={expense}/>
       <NewTransactionButton reloadFatherCallback={fetchTransactions}/>
+      <DateFilter filter={filter} setFilter={setFilter}/>
       <TransactionsList transactions={transactions} handleDelete={handleDeleteTransaction} />
     </div>
   )
