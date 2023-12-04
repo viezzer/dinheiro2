@@ -10,14 +10,13 @@ function DateFilter({ filter, setFilter }: DateFilterProps) {
         <select 
             id='periodFilter' 
             name="periodFilter" 
-            className='mt-5 rounded-xl text-black p-1 bg-card' 
+            className='mt-5 rounded-xl text-black p-1 bg-card text-sm' 
             value={filter} 
             onChange={(e) => {setFilter(e.target.value)}}
         >
             <option value="all">Todas transações</option>
-            <option value="week">Última semana</option>
-            <option value="month">Último mês</option>
-            <option value="custom">Outro período</option>
+            <option value="week">Últimos 7 dias</option>
+            <option value="month">Últimos 30 dias</option>
         </select>
     )
 }

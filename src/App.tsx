@@ -29,20 +29,19 @@ function App() {
   const [balance, setBalance] = useState("3452.00")
   const [income, setIncome] = useState("345.00")
   const [expense, setExpense] = useState("546.54")
-  const [filter, setFilter] = useState('all'); // 'all' | 'week' | 'month' | 'custom'
+  const [filter, setFilter] = useState('week'); // 'all' | 'week' | 'month' | 'custom'
   
 
   useEffect(() => {
     // Fetch transactions when the component mounts
     fetchTransactions();
-  }, []);
+  }, [filter]);
 
   useEffect(() => {
     updateBalanceValue();
   }, [transactions]);
 
   const applyFilter = (allTransactions: Transaction[]) => {
-    const currentDate = dayjs();
     
     switch (filter) {
       case 'week':
@@ -50,7 +49,7 @@ function App() {
         const lastWeek = subWeeks(new Date(), 1);
         return allTransactions.filter((transaction) => {
           try {
-            const formattedTransactionDate = format(parse(transaction.created_at, 'dd/MM/yyyy', new Date()), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
+            const formattedTransactionDate = format(parse(transaction.date, 'yyyy-MM-dd', new Date()), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
             const isAfterLastWeek = isAfter(parse(formattedTransactionDate, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx", new Date()), lastWeek);
             if (isAfterLastWeek) {
               return transaction
@@ -63,7 +62,7 @@ function App() {
         const lastMonth = subMonths(new Date(), 1);
         return allTransactions.filter((transaction) => {
           try {
-            const formattedTransactionDate = format(parse(transaction.created_at, 'dd/MM/yyyy', new Date()), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
+            const formattedTransactionDate = format(parse(transaction.date, 'yyyy-MM-dd', new Date()), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
             const isAfterLastMonth = isAfter(parse(formattedTransactionDate, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx", new Date()), lastMonth);
             if (isAfterLastMonth) {
               return transaction
@@ -74,10 +73,6 @@ function App() {
           
         });
         break;
-      case 'custom':
-        // Implemente a lógica para filtrar transações com base em um período personalizado
-        break;
-      default:
         return allTransactions;
     }
   };
@@ -87,7 +82,11 @@ function App() {
       const storedTransactions: Transaction[] = JSON.parse(localStorage.getItem('transactions') || '[]');
       const filteredTransactions = applyFilter(storedTransactions)
       // Reverse the array for presentation
-      setTransactions(filteredTransactions.reverse());
+      if(filteredTransactions) {
+        setTransactions(filteredTransactions);
+      } else {
+        setTransactions(storedTransactions);
+      }
   }
 
   function updateBalanceValue() {

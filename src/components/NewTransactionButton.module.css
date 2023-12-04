@@ -43,7 +43,7 @@
     width: 100%;
     max-width: 28rem; /* Equivalente a max-w-md no Tailwind */
     color:black;
-    top: 100px;
+    top: 10px;
     left: 50%;
     transform: translate(-50%, 0%);
 }
