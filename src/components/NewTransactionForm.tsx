@@ -70,6 +70,7 @@ function NewTransactionForm({reloadTransactionsFromChildreen}: NewTransactionFor
             setTitle('');
             setAmount('');
             reloadTransactionsFromChildreen();
+            alert('Transação criada com sucesso!')
         }
     }
     
