@@ -77,9 +77,8 @@ function NewTransactionForm({reloadTransactionsFromChildreen}: NewTransactionFor
 
     return (
         <>
-            <h2 className=' text-2xl font-bold justify-center flex'>Nova transação</h2>
             <form className={styles.form} onSubmit={createTransaction}>
-                <label className='flex justify-center font-semibold'>Tipo da transação:</label>
+                <label className='font-semibold'>Tipo da transação:</label>
                 <div className={styles.switchDiv}>
                     <Switch 
                         setIsIncome={setIsIncome} 

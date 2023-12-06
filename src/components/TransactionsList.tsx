@@ -1,4 +1,6 @@
-import styles from './TransactionsList.module.css'
+import * as Dialog from '@radix-ui/react-dialog';
+import styles from './TransactionsList.module.css';
+import { IoClose } from "react-icons/io5";
 
 interface Transaction {
     id:string;
@@ -34,7 +36,9 @@ function TransactionsList({transactions, handleDelete}: TransactionsListProps) {
     return (
         <div className={styles.container}>
             {transactions ? (transactions.map((transaction, index) => (
-                    <div onClick={() => handleDelete(transaction.id, transaction.title)} className='w-full h-11 bg-card flex flex-row rounded-lg mb-2 justify-between sm:w-96 md:w-3/4' key={index}>
+            <Dialog.Root >
+                <Dialog.Trigger className='w-full flex items-center justify-center'>
+                    <div className='w-full h-11 bg-card flex flex-row rounded-lg mb-2 justify-between sm:w-96 md:w-3/4' key={index}>
                         <div className={styles.titleDiv}>
                             <p className={styles.title}>{transaction.title}</p>
                         </div>
@@ -45,11 +49,24 @@ function TransactionsList({transactions, handleDelete}: TransactionsListProps) {
                             </p>
                         </div>
                     </div>
+                </Dialog.Trigger>
+                <Dialog.Portal>
+                    <Dialog.Overlay className={styles.dialogOverlay}/>
+                    <Dialog.Content className={styles.dialog}>
+                        <div className='flex justify-end'>
+                            <Dialog.Close asChild>
+                                <IoClose size={26}/>
+                            </Dialog.Close>
+                        </div>
+                        Teste
+                    </Dialog.Content>
+                </Dialog.Portal>
+            </Dialog.Root>
                 ))) : (
                     <p>Você ainda não possui transações registradas. Registre uma clicando em "Nova Transação"!</p>
                 )
             }
-            </div>
+        </div>
 
     )
 }

@@ -18,10 +18,11 @@ function NewTransactionButton({reloadFatherCallback}: NewTransactionButtonProps)
             <Dialog.Portal>
                 <Dialog.Overlay className={styles.dialogOverlay}/>
                 <Dialog.Content className={styles.dialog}>
-                    <div className='flex justify-end'>
-                        <Dialog.Close asChild>
-                            <IoClose size={26}/>
-                        </Dialog.Close>
+                    <div className='flex justify-between items-center'>
+                        <Dialog.Title className=' text-2xl font-bold'>Nova Transação</Dialog.Title>
+                            <Dialog.Close asChild>
+                                <IoClose size={26}/>
+                            </Dialog.Close>
                     </div>
                     <NewTransactionForm reloadTransactionsFromChildreen={reloadFatherCallback}/>
                 </Dialog.Content>
