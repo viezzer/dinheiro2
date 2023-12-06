@@ -53,12 +53,19 @@ function TransactionsList({transactions, handleDelete}: TransactionsListProps) {
                 <Dialog.Portal>
                     <Dialog.Overlay className={styles.dialogOverlay}/>
                     <Dialog.Content className={styles.dialog}>
-                        <div className='flex justify-end'>
+                        <div className='flex justify-between'>
+                            <Dialog.Title className="text-2xl">{transaction.title}</Dialog.Title>
                             <Dialog.Close asChild>
                                 <IoClose size={26}/>
                             </Dialog.Close>
                         </div>
-                        Teste
+                            <p className='text-2xl'>Valor: {transaction.amount}</p>
+                            <p className='text-2xl'>Data: {transaction.date}</p>
+                            <Dialog.Close asChild>
+                                <button onClick={() => handleDelete(transaction.id, transaction.title)} className='mt-10 border border-1 border-red-600 rounded-xl text-red-600 p-2 hover:bg-red-600 hover:text-white'>
+                                    Deletar
+                                </button>
+                            </Dialog.Close>
                     </Dialog.Content>
                 </Dialog.Portal>
             </Dialog.Root>
