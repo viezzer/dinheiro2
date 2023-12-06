@@ -37,13 +37,13 @@
 
 .dialog {
     position: absolute;
-    padding: 2.5rem; /* Equivalente a p-10 no Tailwind */
+    padding: 2.5rem 2.5rem; /* Equivalente a p-10 no Tailwind */
     background-color: var(--card); /* Cor correspondente a bg-zinc-900 no Tailwind */
     border-radius: 1rem; /* Equivalente a rounded-2xl no Tailwind */
     width: 100%;
     max-width: 28rem; /* Equivalente a max-w-md no Tailwind */
     color:black;
-    top: 10px;
+    top: 0px;
     left: 50%;
     transform: translate(-50%, 0%);
 }
