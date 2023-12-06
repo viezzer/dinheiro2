@@ -1,5 +1,5 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import styles from './Dialog.module.css';
+import styles from './DialogModal.module.css';
 import { IoClose } from "react-icons/io5";
 import {ReactNode} from 'react';
 
