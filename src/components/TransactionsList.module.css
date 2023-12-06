@@ -89,18 +89,3 @@
     color: var(--income)
 }
 
-.deleteBtn {
-    cursor: pointer;
-  background-color: #e74c3c;
-  border: 0;
-  color: #fff;
-  font-size: 20px;
-  line-height: 20px;
-  padding: 2px 5px;
-  position: absolute;
-  /* top: 50%; */
-  /* left: 40px; */
-  transform: translate(40%, -50%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}

@@ -12,7 +12,7 @@ function NewTransactionButton({reloadFatherCallback}: NewTransactionButtonProps)
         <Dialog.Root>
             <Dialog.Trigger className={styles.newTransactionButton}>
                 <FaCirclePlus/>
-                <p className='ml-2'>Nova Transação</p>
+                <p className='ml-2'>Transação</p>
             </Dialog.Trigger>
             <Dialog.Portal>
                 <Dialog.Overlay className={styles.dialogOverlay}/>

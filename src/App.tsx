@@ -150,9 +150,11 @@ function App() {
     <div className="app w-full md:w-9/12 lg:w-8/12 xl:w-7/12 flex flex-col items-center mx-auto">
       <CurrentBalanceDisplay balance={balance}/>
       <IncomeAndExpenseDisplay income={income} expense={expense}/>
-      <NewTransactionButton reloadFatherCallback={fetchTransactions}/>
-      <DateFilter filter={filter} setFilter={setFilter}/>
-      <TransactionsList transactions={transactions} handleDelete={handleDeleteTransaction} />
+      <div className='flex justify-evenly w-screen'>
+        <NewTransactionButton reloadFatherCallback={fetchTransactions}/>
+        <DateFilter filter={filter} setFilter={setFilter}/>
+      </div>
+        <TransactionsList transactions={transactions} handleDelete={handleDeleteTransaction} />
     </div>
   )
 }
