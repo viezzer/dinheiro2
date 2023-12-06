@@ -29,7 +29,7 @@ function App() {
   const [balance, setBalance] = useState("3452.00")
   const [income, setIncome] = useState("345.00")
   const [expense, setExpense] = useState("546.54")
-  const [filter, setFilter] = useState('week'); // 'all' | 'week' | 'month' | 'custom'
+  const [filter, setFilter] = useState('all'); // 'all' | 'week' | 'month' | 'custom'
   
 
   useEffect(() => {
@@ -150,7 +150,7 @@ function App() {
     <div className="app w-full md:w-9/12 lg:w-8/12 xl:w-7/12 flex flex-col items-center mx-auto">
       <CurrentBalanceDisplay balance={balance}/>
       <IncomeAndExpenseDisplay income={income} expense={expense}/>
-      <div className='flex justify-evenly w-screen'>
+      <div className='flex justify-evenly w-screen sm:w-full'>
         <NewTransactionButton reloadFatherCallback={fetchTransactions}/>
         <DateFilter filter={filter} setFilter={setFilter}/>
       </div>
