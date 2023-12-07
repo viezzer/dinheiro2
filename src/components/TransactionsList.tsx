@@ -17,8 +17,6 @@ interface TransactionsListProps {
 
 function TransactionsList({transactions, handleDelete}: TransactionsListProps) {
 
-    
-
     function formatAmount(transaction:Transaction) {
         const operator = parseFloat(transaction.amount) < 0 ? "-" : "+"
         const CSSclass = parseFloat(transaction.amount) < 0 ? styles.minus : styles.plus
@@ -59,8 +57,8 @@ function TransactionsList({transactions, handleDelete}: TransactionsListProps) {
                                 <IoClose size={26}/>
                             </Dialog.Close>
                         </div>
-                            <p className='text-2xl'>Valor: {transaction.amount}</p>
-                            <p className='text-2xl'>Data: {transaction.date}</p>
+                            <p className='text-2xl my-1'>{formatDate(transaction)}</p>
+                            <p className='text-1xl my-1'>{formatAmount(transaction)}</p>
                             <Dialog.Close asChild>
                                 <button onClick={() => handleDelete(transaction.id, transaction.title)} className='mt-10 border border-1 border-red-600 rounded-xl text-red-600 p-2 hover:bg-red-600 hover:text-white'>
                                     Deletar

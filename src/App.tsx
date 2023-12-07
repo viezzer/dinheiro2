@@ -83,9 +83,9 @@ function App() {
       const filteredTransactions = applyFilter(storedTransactions)
       // Reverse the array for presentation
       if(filteredTransactions) {
-        setTransactions(filteredTransactions);
+        setTransactions(filteredTransactions.reverse());
       } else {
-        setTransactions(storedTransactions);
+        setTransactions(storedTransactions.reverse());
       }
   }
 
