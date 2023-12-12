@@ -63,6 +63,10 @@ function NewTransactionForm({reloadTransactionsFromChildreen}: NewTransactionFor
     
             // Add the new transaction to the array
             existingTransactions.push(newTransaction);
+
+            // Sort the transactions array by date
+            existingTransactions.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    
     
             // Save the updated transactions array back to local storage
             localStorage.setItem('transactions', JSON.stringify(existingTransactions));
